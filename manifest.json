@@ -3,6 +3,8 @@
   "name": "mypwa",
   "display": "standalone",
   "orientation": "portrait",
+  "background_color": "white",
+  "theme_color": "white",
   "icons": [
     {
       "src": "gambar/launcher-icon-1x.png",
@@ -18,6 +20,11 @@
       "src": "gambar/launcher-icon-4x.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "gambar/launcher-icon-5x.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": "index.html?launcher=true"
