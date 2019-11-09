@@ -74,5 +74,13 @@ $(document).ready(function(){
     origin: 'bottom',
     reset: true,
   });
+
+  animate.reveal('#footer', {
+    delay: 500,
+    duration: 2000,
+    distance: '100px',
+    origin: 'bottom',
+    reset: true,
+  });
   
 });
