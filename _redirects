@@ -1,1 +1,2 @@
-/https://alanlengkoan.netlify.app /https://alanlengkoan.com
+# Redirects from what the browser requests to what we serve
+/home              https://alanlengkoan.com
