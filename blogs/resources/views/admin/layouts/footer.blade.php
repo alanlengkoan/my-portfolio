@@ -1,15 +1,13 @@
-<footer class="footer">
+<footer class="footer text-center">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
-                <script>
-                    document.write(new Date().getFullYear())
-                </script> © Velzon.
-            </div>
-            <div class="col-sm-6">
-                <div class="text-sm-end d-none d-sm-block">
-                    Design & Develop by Themesbrand
-                </div>
+            <div class="col-sm-12">
+                2017
+                <script type="text/javascript">
+                    var thunskrg = new Date().getFullYear();
+                    document.write("- " + thunskrg);
+                </script>
+                <em> Copyright &copy; Alan Saputra Lengkoan </em>
             </div>
         </div>
     </div>

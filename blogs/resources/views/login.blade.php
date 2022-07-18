@@ -93,9 +93,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <p class="mb-0 text-muted">&copy; <script>
-                                    document.write(new Date().getFullYear())
-                                </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            <p class="mb-0 text-muted">
+                                2017
+                                <script type="text/javascript">
+                                    var thunskrg = new Date().getFullYear();
+                                    document.write("- " + thunskrg);
+                                </script>
+                                <em> Copyright &copy; Alan Saputra Lengkoan </em>
+                            </p>
                         </div>
                     </div>
                 </div>
