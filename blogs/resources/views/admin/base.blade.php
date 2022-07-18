@@ -63,8 +63,10 @@
     <script src="{{ asset_admin('libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset_admin('libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset_admin('libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset_admin('libs/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset_admin('libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
     <script src="{{ asset_admin('js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-    <script src="{{ asset_admin('js/plugins.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="{{ asset_admin('js/app.js') }}"></script>
     <!-- end:: jd global -->
 
