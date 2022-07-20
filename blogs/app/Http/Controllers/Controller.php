@@ -13,7 +13,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     // deklarasi variabel global session
     public $session;
-    public $operator;
 
     public function __construct(Request $request)
     {

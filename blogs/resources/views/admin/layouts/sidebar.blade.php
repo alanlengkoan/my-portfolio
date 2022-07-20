@@ -28,24 +28,35 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Dashboards</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="landing.html">
+                    <a class="nav-link menu-link" href="{{ route('admin.dashboard') }}">
                         <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Dashboards</span>
                     </a>
                 </li>
-                <li class="menu-title"><span data-key="t-menu">Master</span></li>
+                <li class="menu-title"><span data-key="t-menu">Project</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="landing.html">
+                    <a class="nav-link menu-link" href="{{ route('admin.stack') }}">
                         <i data-feather="list" class="icon-dual"></i> <span data-key="t-dashboards">Stack</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i data-feather="list" class="icon-dual"></i> <span data-key="t-dashboards">Kategori</span>
+                    </a>
+                </li>
+                <li class="menu-title"><span data-key="t-menu">Blog</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i data-feather="list" class="icon-dual"></i> <span data-key="t-dashboards">Tag</span>
                     </a>
                 </li>
                 <li class="menu-title"><span data-key="t-menu">Pustaka</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="landing.html">
+                    <a class="nav-link menu-link" href="#">
                         <i data-feather="code" class="icon-dual"></i> <span data-key="t-dashboards">Project</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="landing.html">
+                    <a class="nav-link menu-link" href="#">
                         <i data-feather="file-plus" class="icon-dual"></i> <span data-key="t-dashboards">Blog</span>
                     </a>
                 </li>

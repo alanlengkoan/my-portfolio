@@ -1,22 +1,9 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
-use App\Http\Controllers\admin\DinasController;
-use App\Http\Controllers\admin\KegiatanBeritaAcaraController;
-use App\Http\Controllers\admin\KegiatanController;
-use App\Http\Controllers\admin\KegiatanPencairanDanaController;
-use App\Http\Controllers\admin\LaporanController;
-use App\Http\Controllers\admin\OperatorController;
 use App\Http\Controllers\admin\ProfilController;
-use App\Http\Controllers\admin\TtdController;
+use App\Http\Controllers\admin\StackController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\operator\DashboardController as OperatorDashboardController;
-use App\Http\Controllers\operator\KegiatanBeritaAcaraController as OperatorKegiatanBeritaAcaraController;
-use App\Http\Controllers\operator\KegiatanController as OperatorKegiatanController;
-use App\Http\Controllers\operator\KegiatanPencairanDanaController as OperatorKegiatanPencairanDanaController;
-use App\Http\Controllers\operator\LaporanController as OperatorLaporanController;
-use App\Http\Controllers\operator\ProfilController as OperatorProfilController;
-use App\Http\Controllers\operator\TtdController as OperatorTtdController;
 use Illuminate\Support\Facades\Route;
 
 // begin:: auth
@@ -38,6 +25,17 @@ Route::group(['middleware' => ['session.auth', 'prevent.back.history']], functio
             Route::post('/save_security', [ProfilController::class, 'save_security'])->name('profil.save_security');
         });
         // end:: profil
+
+        // begin:: stack
+        Route::prefix('/stack')->group(function () {
+            Route::get('/', [StackController::class, 'index'])->name('stack');
+            Route::get('/get', [StackController::class, 'get'])->name('stack.get');
+            Route::get('/get_all', [StackController::class, 'get_all'])->name('stack.get_all');
+            Route::get('/get_data_dt', [StackController::class, 'get_data_dt'])->name('stack.get_data_dt');
+            Route::post('/save', [StackController::class, 'save'])->name('stack.save');
+            Route::post('/del', [StackController::class, 'del'])->name('stack.del');
+        });
+        // end:: stack
     });
     // end:: admin
 });

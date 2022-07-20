@@ -51,6 +51,28 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// untuk sweet alert
+function swal(title, text, type, button) {
+    let btn;
+
+    if (type == 'success') {
+        btn = "success"
+    } else if (type == 'error') {
+        btn = "danger"
+    } else if (type == 'warning') {
+        btn = "warning"
+    }
+
+    return Swal.fire({
+        title: title,
+        text: text,
+        icon: type,
+        confirmButtonClass: "btn btn-" + btn + " w-xs mb-1",
+        confirmButtonText: button,
+        buttonsStyling: !1,
+    });
+}
+
 // untuk input nomor type text
 (function ($) {
     $.fn.inputFilter = function (inputFilter) {

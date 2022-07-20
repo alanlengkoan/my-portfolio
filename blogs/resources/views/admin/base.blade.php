@@ -22,11 +22,17 @@
     <script src="{{ asset_admin('js/layout.js') }}"></script>
 
     <!-- begin:: css global -->
-    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/icons.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/app.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/custom.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset_admin('libs/sweetalert2/sweetalert2.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/icons.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/app.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_admin('css/custom.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_admin('my_assets/my_css.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <!-- end:: css global -->
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- begin:: css local -->
     @yield('css')
@@ -59,15 +65,17 @@
     </div>
 
     <!-- begin:: jd global -->
-    <script src="{{ asset_admin('libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset_admin('libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset_admin('libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset_admin('libs/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset_admin('libs/flatpickr/flatpickr.min.js') }}"></script>
-    <script src="{{ asset_admin('libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
-    <script src="{{ asset_admin('js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="{{ asset_admin('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('libs/simplebar/simplebar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('libs/node-waves/waves.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('libs/feather-icons/feather.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('libs/flatpickr/flatpickr.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="text/javascript" src="{{ asset_admin('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_admin('my_assets/my_fun.js') }}"></script>
     <!-- end:: jd global -->
 
     <!-- begin:: js local -->
