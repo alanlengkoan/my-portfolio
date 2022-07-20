@@ -12,10 +12,10 @@
 
     <title>My Blog | {{ $title }}</title>
     <!-- begin:: icon -->
-    <link rel="apple-touch-icon" href="{{ asset_admin('images/favicon.ico') }}" sizes="180x180" />
-    <link rel="icon" href="{{ asset_admin('images/favicon.ico') }}" type="image/x-icon" sizes="32x32" />
-    <link rel="icon" href="{{ asset_admin('images/favicon.ico') }}" type="image/x-icon" sizes="16x16" />
-    <link rel="icon" href="{{ asset_admin('images/favicon.ico') }}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{{ asset_admin('images/icon/apple-touch-icon.png') }}" sizes="180x180" />
+    <link rel="icon" href="{{ asset_admin('images/icon/favicon-32x32.png') }}" type="image/x-icon" sizes="32x32" />
+    <link rel="icon" href="{{ asset_admin('images/icon/favicon-16x16.png') }}" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="{{ asset_admin('images/icon/favicon.ico') }}" type="image/x-icon" />
     <!-- end:: icon -->
 
     <!-- Layout config Js -->

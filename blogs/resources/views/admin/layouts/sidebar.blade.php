@@ -1,19 +1,19 @@
 <div class="app-menu navbar-menu">
     <div class="navbar-brand-box">
-        <a href="index.html" class="logo logo-dark">
+        <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
             <span class="logo-sm">
                 <img src="{{ asset_admin('images/logo-sm.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset_admin('images/logo-dark.png') }}" alt="" height="17">
+                <img src="{{ asset_admin('images/logo-dark.png') }}" alt="" height="50">
             </span>
         </a>
-        <a href="index.html" class="logo logo-light">
+        <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
             <span class="logo-sm">
                 <img src="{{ asset_admin('images/logo-sm.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset_admin('images/logo-light.png') }}" alt="" height="17">
+                <img src="{{ asset_admin('images/logo-light.png') }}" alt="" height="50">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">

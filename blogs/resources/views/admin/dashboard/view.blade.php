@@ -25,7 +25,9 @@
         <!-- end:: breadcumb -->
         <!-- begin:: body -->
         <div class="row">
-            test
+            <div class="col-lg-12">
+
+            </div>
         </div>
         <!-- end:: body -->
     </div>

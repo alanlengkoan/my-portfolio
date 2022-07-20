@@ -11,10 +11,10 @@
     <title>Selamat Datang | {{ $title }}</title>
 
     <!-- begin:: icon -->
-    <link rel="apple-touch-icon" href="{{ asset_admin('images/favicon.ico') }}" sizes="180x180" />
-    <link rel="icon" href="{{ asset_admin('images/favicon.ico') }}" type="image/x-icon" sizes="32x32" />
-    <link rel="icon" href="{{ asset_admin('images/favicon.ico') }}" type="image/x-icon" sizes="16x16" />
-    <link rel="icon" href="{{ asset_admin('images/favicon.ico') }}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{{ asset_admin('images/icon/apple-touch-icon.png') }}" sizes="180x180" />
+    <link rel="icon" href="{{ asset_admin('images/icon/favicon-32x32.png') }}" type="image/x-icon" sizes="32x32" />
+    <link rel="icon" href="{{ asset_admin('images/icon/favicon-16x16.png') }}" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="{{ asset_admin('images/icon/favicon.ico') }}" type="image/x-icon" />
     <!-- end:: icon -->
 
     <!-- begin:: css global -->
@@ -39,17 +39,6 @@
 
         <div class="auth-page-content">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center mt-sm-5 mb-4 text-white-50">
-                            <div>
-                                <a href="index.html" class="d-inline-block auth-logo">
-                                    <img src="{{ asset_admin('images/favicon.ico') }}" alt="" height="20">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card mt-4">
