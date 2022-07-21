@@ -31,7 +31,7 @@ class StackController extends Controller
 
     public function get_all()
     {
-        $response = Stack::select('id_stack AS id', 'nama AS text')->orderBy('id_stack', 'desc')->get();
+        $response = Stack::select('id_stack AS id', 'id_stack AS value', 'nama AS label')->orderBy('id_stack', 'desc')->get();
 
         return response()->json($response);
     }

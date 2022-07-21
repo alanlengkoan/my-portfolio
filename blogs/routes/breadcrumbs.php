@@ -30,3 +30,9 @@ Breadcrumbs::for('admin.project', function (BreadcrumbTrail $trail) {
 
     $trail->push('Project', route('admin.project'));
 });
+
+Breadcrumbs::for('admin.project.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.project');
+
+    $trail->push('Tambah', route('admin.project.add'));
+});

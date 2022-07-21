@@ -20,4 +20,9 @@ class ProjectController extends Controller
     {
         return Template::load($this->session['roles'], 'Project', 'project', 'view');
     }
+
+    public function add()
+    {
+        return Template::load($this->session['roles'], 'Tambah Project', 'project', 'add');
+    }
 }
