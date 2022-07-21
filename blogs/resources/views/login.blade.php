@@ -52,12 +52,12 @@
 
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Username</label>
-                                            <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan username" />
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Username" />
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="password">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input type="password" class="form-control" name="password" id="Password" placeholder="Masukkan password" />
+                                                <input type="password" class="form-control" name="password" id="Password" placeholder="Password" />
                                             </div>
                                         </div>
                                         <div class="form-check">
