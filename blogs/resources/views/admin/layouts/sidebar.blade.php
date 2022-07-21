@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
+                    <a class="nav-link menu-link" href="{{ route('admin.category') }}">
                         <i data-feather="list" class="icon-dual"></i> <span data-key="t-dashboards">Kategori</span>
                     </a>
                 </li>
@@ -51,7 +51,7 @@
                 </li>
                 <li class="menu-title"><span data-key="t-menu">Pustaka</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
+                    <a class="nav-link menu-link" href="{{ route('admin.project') }}">
                         <i data-feather="code" class="icon-dual"></i> <span data-key="t-dashboards">Project</span>
                     </a>
                 </li>

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProfilController;
+use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\StackController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,23 @@ Route::group(['middleware' => ['session.auth', 'prevent.back.history']], functio
             Route::post('/del', [StackController::class, 'del'])->name('stack.del');
         });
         // end:: stack
+
+        // begin:: category
+        Route::prefix('/category')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('category');
+            Route::get('/get', [CategoryController::class, 'get'])->name('category.get');
+            Route::get('/get_all', [CategoryController::class, 'get_all'])->name('category.get_all');
+            Route::get('/get_data_dt', [CategoryController::class, 'get_data_dt'])->name('category.get_data_dt');
+            Route::post('/save', [CategoryController::class, 'save'])->name('category.save');
+            Route::post('/del', [CategoryController::class, 'del'])->name('category.del');
+        });
+        // end:: category
+
+        // begin:: project
+        Route::prefix('/project')->group(function () {
+            Route::get('/', [ProjectController::class, 'index'])->name('project');
+        });
+        // end:: project
     });
     // end:: admin
 });
