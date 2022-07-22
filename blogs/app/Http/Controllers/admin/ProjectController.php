@@ -72,4 +72,21 @@ class ProjectController extends Controller
 
         return Response::json($response);
     }
+
+    public function del(Request $request)
+    {
+        try {
+            $project = Project::find($request->id);
+
+            del_picture($project->gambar);
+
+            $project->delete();
+
+            $response = ['title' => 'Berhasil!', 'text' => 'Data Sukses di Hapus!', 'type' => 'success', 'button' => 'Ok!'];
+        } catch (\Exception $e) {
+            $response = ['title' => 'Gagal!', 'text' => 'Data Gagal di Proses!', 'type' => 'error', 'button' => 'Ok!'];
+        }
+
+        return response()->json($response);
+    }
 }

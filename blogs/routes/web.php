@@ -56,6 +56,7 @@ Route::group(['middleware' => ['session.auth', 'prevent.back.history']], functio
             Route::get('/add', [ProjectController::class, 'add'])->name('project.add');
             Route::get('/get_data_dt', [ProjectController::class, 'get_data_dt'])->name('project.get_data_dt');
             Route::post('/save', [ProjectController::class, 'save'])->name('project.save');
+            Route::post('/del', [ProjectController::class, 'del'])->name('project.del');
         });
         // end:: project
     });

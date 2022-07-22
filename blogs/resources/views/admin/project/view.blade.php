@@ -98,7 +98,63 @@
                         return `<img src="` + checkGambar + `" width="170" height="100" >`;
                     },
                 },
+                {
+                    title: 'Aksi',
+                    data: null,
+                    className: 'text-center',
+                    responsivePriority: -1,
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, full, meta) {
+                        return `
+                            <button type="button" id="del" data-id="` + full.id_project + `" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
+                        `;
+                    },
+                },
             ],
+        });
+    }();
+
+    let untukHapusData = function() {
+        $(document).on('click', '#del', function() {
+            var ini = $(this);
+            Swal.fire({
+                title: "Apakah Anda yakin ingin menghapusnya?",
+                text: "Data yang telah dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                confirmButtonClass: "btn btn-primary w-xs me-2 mt-2",
+                cancelButtonClass: "btn btn-danger w-xs mt-2",
+                buttonsStyling: !1,
+                showCloseButton: !0
+            }).then((del) => {
+                if (del.isConfirmed) {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('admin.project.del') }}",
+                        dataType: 'json',
+                        data: {
+                            id: ini.data('id'),
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        beforeSend: function() {
+                            ini.attr('disabled', 'disabled');
+                            ini.html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                        },
+                        success: function(response) {
+                            swal(response.title, response.text, response.type, response.button).then((value) => {
+                                table.ajax.reload();
+                            });
+                        }
+                    });
+                } else {
+                    return false;
+                }
+            });
         });
     }();
 </script>
