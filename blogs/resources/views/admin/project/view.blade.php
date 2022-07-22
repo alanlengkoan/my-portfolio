@@ -55,5 +55,52 @@
 <script type="text/javascript" src="{{ asset_admin('my_assets/datatables/1.11.3/js/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_admin('my_assets/datatables/1.11.3/js/dataTables.bootstrap4.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_admin('my_assets/datatables-responsive/2.2.9/js/dataTables.responsive.min.js') }}"></script>
+
+<script>
+    let untukTabel = function() {
+        table = $('#tabel-project-dt').DataTable({
+            serverSide: true,
+            responsive: true,
+            processing: true,
+            lengthMenu: [5, 10, 25, 50],
+            pageLength: 10,
+            language: {
+                emptyTable: "Tak ada data yang tersedia pada tabel ini.",
+                processing: "Data sedang diproses...",
+            },
+            ajax: "{{ route('admin.project.get_data_dt') }}",
+            columns: [{
+                    title: 'No.',
+                    data: 'DT_RowIndex',
+                    class: 'text-center'
+                },
+                {
+                    title: 'Judul',
+                    data: 'judul',
+                    class: 'text-center'
+                },
+                {
+                    title: 'Link Demo',
+                    data: 'link_demo',
+                    class: 'text-center'
+                },
+                {
+                    title: 'Link Github',
+                    data: 'link_github',
+                    class: 'text-center'
+                },
+                {
+                    title: 'Gambar',
+                    data: null,
+                    class: 'text-center',
+                    render: function(data, type, full, meta) {
+                        var checkGambar = (full.gambar === null ? '//placehold.co/150' : `{{ asset_upload('picture/` + full.gambar + `') }}`);
+                        return `<img src="` + checkGambar + `" width="170" height="100" >`;
+                    },
+                },
+            ],
+        });
+    }();
+</script>
 @endsection
 <!-- end:: js local -->
