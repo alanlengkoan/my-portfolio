@@ -54,6 +54,7 @@ Route::group(['middleware' => ['session.auth', 'prevent.back.history']], functio
         Route::prefix('/project')->group(function () {
             Route::get('/', [ProjectController::class, 'index'])->name('project');
             Route::get('/add', [ProjectController::class, 'add'])->name('project.add');
+            Route::get('/det/{id}', [ProjectController::class, 'det'])->name('project.det');
             Route::get('/get_data_dt', [ProjectController::class, 'get_data_dt'])->name('project.get_data_dt');
             Route::post('/save', [ProjectController::class, 'save'])->name('project.save');
             Route::post('/del', [ProjectController::class, 'del'])->name('project.del');

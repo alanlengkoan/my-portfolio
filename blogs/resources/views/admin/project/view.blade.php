@@ -106,7 +106,10 @@
                     orderable: false,
                     searchable: false,
                     render: function(data, type, full, meta) {
+                        var urlDetail = "{{ route('admin.project.det', ':id') }}".replace(':id', full.id_project);
+
                         return `
+                            <a href="` + urlDetail + `" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i>&nbsp;Detail</a>&nbsp;
                             <button type="button" id="del" data-id="` + full.id_project + `" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                         `;
                     },

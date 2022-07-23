@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Libraries\Template;
 use App\Models\Project;
+use App\Models\ProjectPicture;
 use App\Models\ProjectStack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -27,6 +28,17 @@ class ProjectController extends Controller
     public function add()
     {
         return Template::load($this->session['roles'], 'Tambah Project', 'project', 'add');
+    }
+
+    public function det($id)
+    {
+        $data = [
+            'project'          => Project::find($id),
+            'project_stack'    => ProjectStack::where('id_project', $id)->get(),
+            'project_picture'  => ProjectPicture::where('id_project', $id)->get(),
+        ];
+
+        return Template::load($this->session['roles'], 'Detail Project', 'project', 'det', $data);
     }
 
     public function get_data_dt()
@@ -62,6 +74,19 @@ class ProjectController extends Controller
                     ];
                 }
                 ProjectStack::insert($project_stack);
+
+                // project picture
+                $picture = $request->picture;
+                for ($i = 0; $i < count($picture); $i++) {
+                    $nama_foto[$i] = add_picture($request->picture[$i]);
+
+                    $project_picture[] = [
+                        'id_project' => $project->id_project,
+                        'picture'    => $nama_foto[$i],
+                        'by_users'   => $this->session['id_users'],
+                    ];
+                }
+                ProjectPicture::insert($project_picture);
 
                 $response = ['title' => 'Berhasil!', 'text' => 'Data Sukses di Simpan!', 'type' => 'success', 'button' => 'Ok!'];
             } else {

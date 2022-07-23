@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row gy-4">
-                            <form id="form-add-upd" action="{{ route('admin.project.save') }}" method="POST">
+                            <form id="form-add-upd" action="{{ route('admin.project.save') }}" method="POST" enctype="multipart/form-data">
                                 <!-- begin:: id -->
                                 <input type="hidden" name="id_project" id="id_project" />
                                 <!-- end:: id -->
@@ -83,6 +83,19 @@
                                         <span class="errorInput"></span>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row mb-3">
+                                    <label for="link_github" class="col-sm-2 col-form-label">Detail Gambar&nbsp;*</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" name="picture[]" id="picture" class="form-control" multiple />
+                                        <span class="errorInput"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="mt-1 text-center">
+                                        <div class="preview-image row"></div>
+                                    </div>
+                                </div>
                                 <div class="col-lg-12">
                                     <div class="hstack gap-2 justify-content-end">
                                         <a href="{{ route('admin.project') }}" id="cancel" class="btn btn-danger btn-sm">
@@ -122,6 +135,35 @@
         }, 'json');
     }();
 
+    let untukPreviewDetailGambar = function() {
+        $('#picture').on('change', function() {
+            multiImgPreview(this, 'div.preview-image');
+        });
+    }();
+
+    let untukRemoveDetailGambar = function() {
+        $(document).on('click', '.btn-remove', function(e) {
+            e.preventDefault();
+            $(this).parent().remove();
+
+            var id = $(this).data('id');
+            var dt = new DataTransfer();
+            var input = document.getElementById('picture');
+            var {
+                files
+            } = input;
+
+            for (let i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (id !== i) {
+                    dt.items.add(file)
+                }
+            }
+
+            input.files = dt.files
+        });
+    }();
+
     let untukSimpanData = function() {
         $(document).on('submit', '#form-add-upd', function(e) {
             e.preventDefault();
@@ -132,6 +174,7 @@
             $('#link_demo').attr('required', 'required');
             $('#link_github').attr('required', 'required');
             $('#gambar').attr('required', 'required');
+            $('#picture').attr('required', 'required');
 
             var parsleyConfig = {
                 errorsContainer: function(parsleyField) {
@@ -171,6 +214,21 @@
             }
         });
     }();
+
+    function multiImgPreview(input, element) {
+        if (input.files && input.files[0]) {
+            var filesAmount = input.files.length;
+            var a = 0;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+                reader.readAsDataURL(input.files[i]);
+                reader.onload = function(e) {
+                    var html = `<div class="col-lg-3"><button type="button" data-id="` + a++ + `" class="btn btn-danger btn-remove mb-1"><span>&times;</span></button><img class="img-fluid" src="` + e.target.result + `"></div>`;
+                    $('.preview-image').append(html);
+                }
+            }
+        }
+    }
 </script>
 @endsection
 <!-- end:: js local -->

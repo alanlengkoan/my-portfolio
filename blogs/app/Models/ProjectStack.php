@@ -20,4 +20,9 @@ class ProjectStack extends Model
         'id_stack',
         'by_users'
     ];
+    // untuk relasi ke tabel stack
+    public function toStack()
+    {
+        return $this->belongsTo(Stack::class, 'id_stack');
+    }
 }
