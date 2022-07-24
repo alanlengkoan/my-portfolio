@@ -1,6 +1,7 @@
 {
-  "short_name": "mypwa",
-  "name": "mypwa",
+  "short_name": "alanlengkoan",
+  "name": "alanlengkoan",
+  "description": "this is my personal website",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "white",
