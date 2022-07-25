@@ -18,7 +18,7 @@
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">{{ $title }}</h4>
                     <div class="page-title-right">
-                        {{ Breadcrumbs::render('admin.project.add') }}
+                        {{ Breadcrumbs::render('admin.project.det', $project) }}
                     </div>
                 </div>
             </div>
@@ -58,7 +58,6 @@
                                         <input type="text" id="link_github" class="form-control-plaintext" value="{{ $project->link_github }}" />
                                     </div>
                                 </div>
-                                <hr>
                                 <div class="row mb-3">
                                     <label for="id_stack" class="col-sm-2 col-form-label">Stack</label>
                                     <div class="col-sm-10">
@@ -77,9 +76,10 @@
                                 <div class="row mb-3">
                                     <label for="link_github" class="col-sm-2 col-form-label">Gambar</label>
                                     <div class="col-sm-10">
-                                        <img src="{{ asset_upload('picture/'.$project->gambar) }}" alt="{{ $project->judul }}" class="img-fluid" />
+                                        <img src="{{ asset_upload('picture/'.$project->gambar) }}" alt="{{ $project->judul }}" class="img-fluid" width="500" />
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="row mb-3">
                                     <label for="link_github" class="col-sm-2 col-form-label">Detail Gambar</label>
                                     <div class="col-sm-10">

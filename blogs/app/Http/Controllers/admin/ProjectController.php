@@ -30,6 +30,17 @@ class ProjectController extends Controller
         return Template::load($this->session['roles'], 'Tambah Project', 'project', 'add');
     }
 
+    public function upd($id)
+    {
+        $data = [
+            'project'          => Project::find($id),
+            'project_stack'    => ProjectStack::where('id_project', $id)->get(),
+            'project_picture'  => ProjectPicture::where('id_project', $id)->get(),
+        ];
+
+        return Template::load($this->session['roles'], 'Ubah Project', 'project', 'upd', $data);
+    }
+
     public function det($id)
     {
         $data = [

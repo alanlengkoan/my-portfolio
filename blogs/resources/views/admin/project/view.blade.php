@@ -107,9 +107,11 @@
                     searchable: false,
                     render: function(data, type, full, meta) {
                         var urlDetail = "{{ route('admin.project.det', ':id') }}".replace(':id', full.id_project);
+                        var urlUpdate = "{{ route('admin.project.upd', ':id') }}".replace(':id', full.id_project);
 
                         return `
                             <a href="` + urlDetail + `" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i>&nbsp;Detail</a>&nbsp;
+                            <a href="` + urlUpdate + `" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i>&nbsp;Ubah</a>&nbsp;
                             <button type="button" id="del" data-id="` + full.id_project + `" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Hapus</button>
                         `;
                     },

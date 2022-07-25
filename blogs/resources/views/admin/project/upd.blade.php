@@ -19,7 +19,7 @@
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">{{ $title }}</h4>
                     <div class="page-title-right">
-                        {{ Breadcrumbs::render('admin.project.add') }}
+                        {{ Breadcrumbs::render('admin.project.upd', $project) }}
                     </div>
                 </div>
             </div>
@@ -36,34 +36,34 @@
                         <div class="row gy-4">
                             <form id="form-add-upd" action="{{ route('admin.project.save') }}" method="POST" enctype="multipart/form-data">
                                 <!-- begin:: id -->
-                                <input type="hidden" name="id_project" id="id_project" />
+                                <input type="hidden" name="id_project" id="id_project" value="{{ $project->id_project }}" />
                                 <!-- end:: id -->
 
                                 <div class="row mb-3">
                                     <label for="judul" class="col-sm-2 col-form-label">Judul&nbsp;*</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="judul" id="judul" class="form-control" placeholder="Enter judul" />
+                                        <input type="text" name="judul" id="judul" class="form-control" value="{{ $project->judul }}" placeholder="Enter judul" />
                                         <span class="errorInput"></span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi&nbsp;*</label>
                                     <div class="col-sm-10">
-                                        <textarea name="deskripsi" id="deskripsi" class="form-control" placeholder="Enter deskripsi"></textarea>
+                                        <textarea name="deskripsi" id="deskripsi" class="form-control" placeholder="Enter deskripsi">{{ $project->deskripsi }}</textarea>
                                         <span class="errorInput"></span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="link_demo" class="col-sm-2 col-form-label">Link Demo&nbsp;*</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="link_demo" id="link_demo" class="form-control" placeholder="Enter demo link" />
+                                        <input type="text" name="link_demo" id="link_demo" class="form-control" value="{{ $project->link_demo }}" placeholder="Enter demo link" />
                                         <span class="errorInput"></span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="link_github" class="col-sm-2 col-form-label">Link Github&nbsp;*</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="link_github" id="link_github" class="form-control" placeholder="Enter github link" />
+                                        <input type="text" name="link_github" id="link_github" class="form-control" value="{{ $project->link_github }}" placeholder="Enter github link" />
                                         <span class="errorInput"></span>
                                     </div>
                                 </div>
@@ -135,101 +135,6 @@
             });
         }, 'json');
     }();
-
-    let untukPreviewDetailGambar = function() {
-        $('#picture').on('change', function() {
-            multiImgPreview(this, 'div.preview-image');
-        });
-    }();
-
-    let untukRemoveDetailGambar = function() {
-        $(document).on('click', '.btn-remove', function(e) {
-            e.preventDefault();
-            $(this).parent().remove();
-
-            var id = $(this).data('id');
-            var dt = new DataTransfer();
-            var input = document.getElementById('picture');
-            var {
-                files
-            } = input;
-
-            for (let i = 0; i < files.length; i++) {
-                var file = files[i];
-                if (id !== i) {
-                    dt.items.add(file)
-                }
-            }
-
-            input.files = dt.files
-        });
-    }();
-
-    let untukSimpanData = function() {
-        $(document).on('submit', '#form-add-upd', function(e) {
-            e.preventDefault();
-
-            $('#judul').attr('required', 'required');
-            $('#deskripsi').attr('required', 'required');
-            $('#id_stack').attr('required', 'required');
-            $('#link_demo').attr('required', 'required');
-            $('#link_github').attr('required', 'required');
-            $('#gambar').attr('required', 'required');
-            $('#picture').attr('required', 'required');
-
-            var parsleyConfig = {
-                errorsContainer: function(parsleyField) {
-                    var $err = parsleyField.$element.siblings('.errorInput');
-                    return $err;
-                }
-            };
-
-            $("#form-add-upd").parsley(parsleyConfig);
-
-            if ($('#form-add-upd').parsley().isValid() == true) {
-                $.ajax({
-                    method: $(this).attr('method'),
-                    url: $(this).attr('action'),
-                    data: new FormData(this),
-                    contentType: false,
-                    processData: false,
-                    cache: false,
-                    dataType: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    beforeSend: function() {
-                        $('#save').attr('disabled', 'disabled');
-                        $('#save').html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
-                    },
-                    success: function(response) {
-                        swal(response.title, response.text, response.type, response.button).then((value) => {
-                            location.href = "{{ route('admin.project') }}";
-                            $('#modal-add-upd').modal('hide');
-                        });
-
-                        $('#save').removeAttr('disabled');
-                        $('#save').html('<i class="fa fa-save"></i>&nbsp;Simpan');
-                    }
-                });
-            }
-        });
-    }();
-
-    function multiImgPreview(input, element) {
-        if (input.files && input.files[0]) {
-            var filesAmount = input.files.length;
-            var a = 0;
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
-                reader.readAsDataURL(input.files[i]);
-                reader.onload = function(e) {
-                    var html = `<div class="col-lg-3"><button type="button" data-id="` + a++ + `" class="btn btn-danger btn-remove mb-1"><span>&times;</span></button><img class="img-fluid" src="` + e.target.result + `"></div>`;
-                    $('.preview-image').append(html);
-                }
-            }
-        }
-    }
 </script>
 @endsection
 <!-- end:: js local -->
