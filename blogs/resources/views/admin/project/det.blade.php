@@ -85,7 +85,7 @@
                                     <div class="col-sm-10">
                                         <div class="row">
                                             @foreach($project_picture as $row)
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-3 pt-3 pb-3">
                                                 <img src="{{ asset_upload('picture/'.$row->picture) }}" alt="{{ $row->judul }}" class="img-fluid" />
                                             </div>
                                             @endforeach

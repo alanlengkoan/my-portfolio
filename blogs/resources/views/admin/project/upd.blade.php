@@ -80,7 +80,10 @@
                                 <div class="row mb-3">
                                     <label for="link_github" class="col-sm-2 col-form-label">Gambar&nbsp;*</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="gambar" id="gambar" class="form-control" />
+                                        <img style="padding-bottom: 10px" src="{{ ($project->gambar === null ? '//placehold.co/150' : asset_upload('picture/'.$project->gambar)) }}" width="500" />
+                                        <br>
+                                        <input type="file" name="gambar" class="form-control" disabled="disabled" />
+                                        <label style="padding-top: 10px"><input type="checkbox" name="change_picture" id="change_picture" />&nbsp;Ubah Foto!</label>
                                         <span class="errorInput"></span>
                                     </div>
                                 </div>
@@ -142,6 +145,21 @@
         }, 'json');
     }();
 
+    let untukUbahGambar = function() {
+        $(document).on('click', '#change_picture', function() {
+            var ini = $(this);
+            if (ini.is(':checked')) {
+                $("input[name*='gambar']").removeAttr('disabled');
+                $("input[name*='gambar']").attr('id', 'gambar');
+            } else {
+                $("input[name*='gambar']").attr('disabled', 'disabled');
+                $("input[name*='gambar']").removeAttr('id');
+                $("input[name*='gambar']").removeAttr('required');
+                ini.parent().parent().find('#error').empty();
+            }
+        });
+    }();
+
     let untukSimpanData = function() {
         $(document).on('submit', '#form-add-upd', function(e) {
             e.preventDefault();
@@ -151,6 +169,7 @@
             $('#id_stack').attr('required', 'required');
             $('#link_demo').attr('required', 'required');
             $('#link_github').attr('required', 'required');
+            $('#gambar').attr('required', 'required');
 
             var parsleyConfig = {
                 errorsContainer: function(parsleyField) {
@@ -189,6 +208,88 @@
             }
         });
     }();
+
+    let untukDetailGambar = function() {
+        $.get("{{ route('admin.project.get_picture_detail', $project->id_project) }}", function(response) {
+            $.each(response, function(i, item) {
+                var checkGambar = (item.picture === null ? '//placehold.co/150' : `{{ asset_upload('picture/` + item.picture + `') }}`);
+                var html = `<div class="col-lg-3 pt-3 pb-3"><button type="button" data-id="` + item.id_project_picture + `" class="btn btn-danger btn-delete mb-1"><span>&times;</span></button><img class="img-fluid" src="` + checkGambar + `"></div>`;
+                $('.preview-image').append(html);
+            });
+        }, 'json');
+    }();
+
+    let untukPreviewDetailGambar = function() {
+        $('#picture').on('change', function() {
+            multiImgPreview(this, 'div.preview-image');
+        });
+    }();
+
+    let untukRemoveDetailGambar = function() {
+        $(document).on('click', '.btn-remove', function(e) {
+            e.preventDefault();
+            $(this).parent().remove();
+
+            var id = $(this).data('id');
+            var dt = new DataTransfer();
+            var input = document.getElementById('picture');
+            var {
+                files
+            } = input;
+
+            for (let i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (id !== i) {
+                    dt.items.add(file)
+                }
+            }
+
+            input.files = dt.files
+        });
+    }();
+
+    let untukDeleteDetailGambar = function() {
+        $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault();
+
+            var ini = $(this);
+            var id = $(this).data('id');
+
+            $.ajax({
+                type: "post",
+                url: "{{ route('admin.project.del_picture_detail') }}",
+                dataType: 'json',
+                data: {
+                    id: ini.data('id'),
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    ini.attr('disabled', 'disabled');
+                    ini.html('<i class="fa fa-spinner"></i>');
+                },
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        });
+    }();
+
+    function multiImgPreview(input, element) {
+        if (input.files && input.files[0]) {
+            var filesAmount = input.files.length;
+            var a = 0;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+                reader.readAsDataURL(input.files[i]);
+                reader.onload = function(e) {
+                    var html = `<div class="col-lg-3 pt-3 pb-3"><button type="button" data-id="` + a++ + `" class="btn btn-danger btn-remove mb-1"><span>&times;</span></button><img class="img-fluid" src="` + e.target.result + `"></div>`;
+                    $('.preview-image').append(html);
+                }
+            }
+        }
+    }
 </script>
 @endsection
 <!-- end:: js local -->

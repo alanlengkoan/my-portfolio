@@ -52,19 +52,6 @@ class ProjectController extends Controller
         return Template::load($this->session['roles'], 'Detail Project', 'project', 'det', $data);
     }
 
-    public function get_stack_detail($id)
-    {
-        $get = ProjectStack::with('toStack')->where('id_project', $id)->get();
-
-        $response = [];
-
-        foreach ($get as $value) {
-            $response[] = $value->id_stack;
-        }
-
-        return Response::json($response);
-    }
-
     public function get_data_dt()
     {
         $data = Project::orderBy('id_project', 'desc')->get();
@@ -121,10 +108,18 @@ class ProjectController extends Controller
                 $project->link_demo   = $request->link_demo;
                 $project->link_github = $request->link_github;
                 $project->by_users    = $this->session['id_users'];
+
+                if (isset($request->change_picture) && $request->change_picture === 'on') {
+                    $nama_gambar     = upd_picture($request->gambar, $project->gambar);
+                    $project->gambar = $nama_gambar;
+                }
+
                 $project->save();
 
                 // project stack
-                ProjectStack::truncate();
+                $find_project_stack = ProjectStack::whereIdProject($request->id_project);
+                $find_project_stack->delete();
+
                 $stack = $request->id_stack;
                 for ($i = 0; $i < count($stack); $i++) {
                     $project_stack[] = [
@@ -134,6 +129,21 @@ class ProjectController extends Controller
                     ];
                 }
                 ProjectStack::insert($project_stack);
+
+                // project picture
+                $picture = $request->picture;
+                if ($picture !== null) {
+                    for ($i = 0; $i < count($picture); $i++) {
+                        $nama_foto[$i] = add_picture($request->picture[$i]);
+
+                        $project_picture[] = [
+                            'id_project' => $project->id_project,
+                            'picture'    => $nama_foto[$i],
+                            'by_users'   => $this->session['id_users'],
+                        ];
+                    }
+                    ProjectPicture::insert($project_picture);
+                }
 
                 $response = ['title' => 'Berhasil!', 'text' => 'Data Sukses di Simpan!', 'type' => 'success', 'button' => 'Ok!'];
             }
@@ -147,15 +157,66 @@ class ProjectController extends Controller
     public function del(Request $request)
     {
         try {
-            $project = Project::find($request->id);
+            $project         = Project::find($request->id);
+            $project_picture = ProjectPicture::whereIdProject($request->id)->get();
 
             del_picture($project->gambar);
+
+            foreach ($project_picture as $key => $value) {
+                del_picture($value->picture);
+            }
 
             $project->delete();
 
             $response = ['title' => 'Berhasil!', 'text' => 'Data Sukses di Hapus!', 'type' => 'success', 'button' => 'Ok!'];
         } catch (\Exception $e) {
             $response = ['title' => 'Gagal!', 'text' => 'Data Gagal di Proses!', 'type' => 'error', 'button' => 'Ok!'];
+        }
+
+        return response()->json($response);
+    }
+
+    public function get_stack_detail($id)
+    {
+        $get = ProjectStack::with('toStack')->where('id_project', $id)->get();
+
+        $response = [];
+
+        foreach ($get as $value) {
+            $response[] = $value->id_stack;
+        }
+
+        return Response::json($response);
+    }
+
+    public function get_picture_detail($id)
+    {
+        $get = ProjectPicture::where('id_project', $id)->get();
+
+        $response = [];
+
+        foreach ($get as $value) {
+            $response[] = [
+                'id_project_picture' => $value->id_project_picture,
+                'picture'            => $value->picture,
+            ];
+        }
+
+        return Response::json($response);
+    }
+
+    public function del_picture_detail(Request $request)
+    {
+        try {
+            $project_picture = ProjectPicture::find($request->id);
+
+            del_picture($project_picture->picture);
+
+            $project_picture->delete();
+
+            $response = ['title' => 'Berhasil!', 'text' => 'Gambar Sukses di Hapus!', 'type' => 'success', 'button' => 'Ok!'];
+        } catch (\Exception $e) {
+            $response = ['title' => 'Gagal!', 'text' => 'Gambar Gagal di Proses!', 'type' => 'error', 'button' => 'Ok!'];
         }
 
         return response()->json($response);
