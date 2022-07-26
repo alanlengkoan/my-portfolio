@@ -125,9 +125,11 @@
 <script type="text/javascript" src="{{ asset_admin('my_assets/parsley/2.9.2/parsley.js') }}"></script>
 
 <script>
+    let StackChoice;
+
     let untukMultipleSelectStack = function() {
         $.get("{{ route('admin.stack.get_all') }}", function(response) {
-            new Choices('#id_stack', {
+            StackChoice = new Choices('#id_stack', {
                 removeItemButton: true,
                 removeItems: true,
                 duplicateItems: false,

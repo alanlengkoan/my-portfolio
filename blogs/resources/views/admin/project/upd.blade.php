@@ -125,15 +125,69 @@
 <script type="text/javascript" src="{{ asset_admin('my_assets/parsley/2.9.2/parsley.js') }}"></script>
 
 <script>
+    let StackChoice;
+
     let untukMultipleSelectStack = function() {
         $.get("{{ route('admin.stack.get_all') }}", function(response) {
-            new Choices('#id_stack', {
+            StackChoice = new Choices('#id_stack', {
                 removeItemButton: true,
                 removeItems: true,
                 duplicateItems: false,
                 choices: response
             });
         }, 'json');
+
+        $.get("{{ route('admin.project.get_stack_detail', $project->id_project) }}", function(response) {
+            StackChoice.setChoiceByValue(response);
+        }, 'json');
+    }();
+
+    let untukSimpanData = function() {
+        $(document).on('submit', '#form-add-upd', function(e) {
+            e.preventDefault();
+
+            $('#judul').attr('required', 'required');
+            $('#deskripsi').attr('required', 'required');
+            $('#id_stack').attr('required', 'required');
+            $('#link_demo').attr('required', 'required');
+            $('#link_github').attr('required', 'required');
+
+            var parsleyConfig = {
+                errorsContainer: function(parsleyField) {
+                    var $err = parsleyField.$element.siblings('.errorInput');
+                    return $err;
+                }
+            };
+
+            $("#form-add-upd").parsley(parsleyConfig);
+
+            if ($('#form-add-upd').parsley().isValid() == true) {
+                $.ajax({
+                    method: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        $('#save').attr('disabled', 'disabled');
+                        $('#save').html('<i class="fa fa-spinner"></i>&nbsp;Menunggu...');
+                    },
+                    success: function(response) {
+                        swal(response.title, response.text, response.type, response.button).then((value) => {
+                            location.reload();
+                        });
+
+                        $('#save').removeAttr('disabled');
+                        $('#save').html('<i class="fa fa-save"></i>&nbsp;Simpan');
+                    }
+                });
+            }
+        });
     }();
 </script>
 @endsection
