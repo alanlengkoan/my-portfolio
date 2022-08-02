@@ -1,0 +1,31 @@
+{
+  "short_name": "mypwa",
+  "name": "mypwa",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "white",
+  "theme_color": "white",
+  "icons": [
+    {
+      "src": "gambar/launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "gambar/launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "gambar/launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "gambar/launcher-icon-5x.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html?launcher=true"
+}
